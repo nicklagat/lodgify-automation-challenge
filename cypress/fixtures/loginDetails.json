@@ -1,0 +1,8 @@
+{
+    "email": "your_email@example.com",
+    "password": "your_password",
+    "pkce_oauth": null,
+    "web_session": true,
+    "permanent_login": true,
+    "device_id": "f8bef0c6-8bfd-52f1-60cd-58390a63473d"
+ }
