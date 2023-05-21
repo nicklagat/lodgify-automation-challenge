@@ -12,3 +12,8 @@ cypress/screenshots/
 
 # Ignore the build directory
 dist/
+
+
+# Ignore reports generated for now
+report/
+*.report
