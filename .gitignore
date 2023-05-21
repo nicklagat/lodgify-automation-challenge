@@ -1,0 +1,14 @@
+# .gitignore
+
+# Ignore node_modules directory
+node_modules/
+
+# Ignore Cypress videos and screenshots
+cypress/videos/
+cypress/screenshots/
+
+# Ignore log files
+*.log
+
+# Ignore the build directory
+dist/
