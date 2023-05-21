@@ -9,7 +9,6 @@ describe("Authentication  via API", () => {
 
         // Smart check 2: Verify the token is not empty
         expect(Cypress.env("authToken")).to.not.be.empty;
-
         // Smart check 3: Verify the token length is within a certain range
         const tokenLength = Cypress.env("authToken").length;
         expect(tokenLength).to.be.within(20, 50);
