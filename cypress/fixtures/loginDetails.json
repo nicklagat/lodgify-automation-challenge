@@ -1,6 +1,6 @@
 {
-    "email": "nicksonkipmwadime@gmail.com",
-    "password": "Kypo1234",
+    "email": "your_email@example.com",
+    "password": "your_password",
     "pkce_oauth": null,
     "web_session": true,
     "permanent_login": true,
