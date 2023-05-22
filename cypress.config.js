@@ -5,15 +5,15 @@ module.exports = defineConfig({
   videoTimeout: 120000,
   videoCompression: 5,
   e2e: {
-    "baseUrl": "https://todoist.com",
-    "env": {
-      "apiBaseUrl": "https://api.todoist.com",
+    baseUrl: "https://todoist.com",
+    env: {
+      apiBaseUrl: "https://api.todoist.com",
     },
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
   },
-  
+
   browser: "chrome",
 
   reporter: "mochawesome",
