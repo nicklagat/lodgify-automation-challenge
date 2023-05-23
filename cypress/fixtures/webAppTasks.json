@@ -1,22 +1,3 @@
-[
-  {
-    "content": "Send out monthly newsletter",
-    "project_id": "2313361665"
-  },
-  {
-    "content": "Review quarterly sales report",
-    "project_id": "2313361665"
-  },
-  {
-    "content": "Schedule team meeting",
-    "project_id": "2313361665"
-  },
-  {
-    "content": "Prepare presentation for conference",
-    "project_id": "2313361665"
-  },
-  {
-    "content": "Follow up with client regarding proposal",
-    "project_id": "2313361665"
-  }
-]
+{
+  "content": "Follow up with client regarding proposal"
+}

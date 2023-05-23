@@ -7,7 +7,6 @@ describe("Create Project", () => {
   it("should create project via API", () => {
     // Step 1: Create test task via API
     cy.createProjectViaAPI().then((response) => {
-      console.log(response);
       const createdProject = response.id;
       // Step 2: Login into the web application
       cy.loginViaUI();
@@ -17,6 +16,9 @@ describe("Create Project", () => {
       cy.contains(response.name).should("be.visible");
       // `Step 5: Assert that the project url is present on the page
       cy.url().should("include", "/app/project/" + createdProject);
+
+      cy.log("Project ID:", createdProject);
+      cy.deleteProjectViaAPI();
     });
   });
 });
