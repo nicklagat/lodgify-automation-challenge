@@ -2,6 +2,9 @@ describe("Update Task Via API", () => {
   beforeEach(() => {
     // Authenticate or obtain the auth token
     cy.AuthViaAPI();
+
+    cy.createProjectViaAPI();
+
   });
 
   it("should update task via API", () => {
@@ -11,7 +14,7 @@ describe("Update Task Via API", () => {
       console.log(updatedTask);
       // Step 2: Login into the web application
       cy.loginViaUI();
-      // Step 3: Verify on web application that task is created
+      // Step 3: Verify on web application that task is updated
     });
   });
 });
