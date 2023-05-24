@@ -52,14 +52,13 @@ Cypress.Commands.add("AuthViaAPI", () => {
           window.localStorage.getItem("authToken") !== token ||
           Cypress.env("authToken") !== token
         ) {
-          throw new Error("Stored tokens do not match the token returned in the response");
+          throw new Error(
+            "Stored tokens do not match the token returned in the response"
+          );
         }
       });
   });
 });
-
-
-
 
 Cypress.Commands.add("createProjectViaAPI", () => {
   // Retrieve the authentication token from Cypress environment variables
@@ -109,7 +108,9 @@ Cypress.Commands.add("createProjectViaAPI", () => {
 
         // Check if the name of the project returned matches the name we sent
         if (response.name !== name) {
-          throw new Error("The project's name does not match the name provided");
+          throw new Error(
+            "The project's name does not match the name provided"
+          );
         }
 
         // Assert that the response contains the expected properties
@@ -124,8 +125,6 @@ Cypress.Commands.add("createProjectViaAPI", () => {
       });
   });
 });
-
-
 
 Cypress.Commands.add("createTaskViaAPI", () => {
   // Retrieve the token from Cypress environment variables
@@ -174,7 +173,9 @@ Cypress.Commands.add("createTaskViaAPI", () => {
 
         // Check if the content of the task returned matches the content we sent
         if (response.content !== content) {
-          throw new Error("The task's content does not match the content provided");
+          throw new Error(
+            "The task's content does not match the content provided"
+          );
         }
 
         // Assert that the response contains the expected properties
@@ -188,10 +189,6 @@ Cypress.Commands.add("createTaskViaAPI", () => {
       });
   });
 });
-
-
-
-
 
 Cypress.Commands.add("updateTaskViaAPI", (dueString) => {
   // Retrieve the token from Cypress environment variables
@@ -250,10 +247,6 @@ Cypress.Commands.add("updateTaskViaAPI", (dueString) => {
   });
 });
 
-
-
-
-
 Cypress.Commands.add("completeTaskViaAPI", () => {
   // Step 1: Retrieve the token from Cypress environment variables
   const authToken = Cypress.env("authToken");
@@ -310,11 +303,45 @@ Cypress.Commands.add("completeTaskViaAPI", () => {
   });
 });
 
+Cypress.Commands.add("getTaskViaAPI", () => {
+  // Step 1: Retrieve the token from Cypress environment variables
+  const authToken = Cypress.env("authToken");
 
+  // Check if authToken is not undefined or null
+  if (!authToken) {
+    throw new Error("authToken is undefined or null");
+  }
 
+  // Retrieve the API base URL from Cypress environment variables
+  const apiBaseUrl = Cypress.env("apiBaseUrl");
 
+  // Check if apiBaseUrl is not undefined or null
+  if (!apiBaseUrl) {
+    throw new Error("apiBaseUrl is undefined or null");
+  }
 
+  // Step 2: Perform a GET request to get an active task by ID
+  return cy
+    .request({
+      method: "GET",
+      url: `${apiBaseUrl}/rest/v2/tasks`,
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+        "Content-Type": "application/json",
+      },
+    })
+    .then((completeResponse) => {
+      // Check if completeResponse is not undefined or null
+      if (!completeResponse) {
+        throw new Error("completeResponse is undefined or null");
+      }
 
+      // Step 5: Output relevant information for verification or debugging
+      console.log(completeResponse);
+
+      return completeResponse;
+    });
+});
 
 Cypress.Commands.add("deleteProjectViaAPI", () => {
   // Retrieve the authentication token from Cypress environment variables
@@ -358,12 +385,6 @@ Cypress.Commands.add("deleteProjectViaAPI", () => {
     });
 });
 
-
-
-
-
-
-
 Cypress.Commands.add("loginViaUI", () => {
   cy.fixture("credentials.json").then((credentials) => {
     const { username, password } = credentials;
@@ -373,10 +394,10 @@ Cypress.Commands.add("loginViaUI", () => {
 
     // Enter the username
     cy.get('[id^="element-"]').first().clear(); // Clear the input field (if necessary)
-    cy.get('[id^="element-"]').first().type(username); // Type the username into the input field
+    cy.get('[id^="element-"]').first().type(username, { log: false }); // Type the username into the input field
 
     // Enter the password
-    cy.get('[id^="element-"]').last().type(password); // Type the password into the input field
+    cy.get('[id^="element-"]').last().type(password, { log: false }); // Type the password into the input field
 
     // Click the login button
     cy.get('[data-gtm-id="start-email-login"]').click();
@@ -385,35 +406,36 @@ Cypress.Commands.add("loginViaUI", () => {
 
 const TIMEOUT = 70000; // Adjust this value as needed
 
-Cypress.Commands.add("createTaskViaWeb", () => {
+Cypress.Commands.add("createTaskViaWeb", (projectId) => {
   // Retrieve the tasks from the webAppTasks.json fixture
   cy.fixture("webAppTasks.json").then((webTasks) => {
-    // Iterate over each webTask
-    webTasks.forEach((webTask, index) => {
-      const { content, project_id } = webTask;
+    const { content } = webTasks;
 
-      // Click on the add task button
-      cy.get(".plus_add_button", { timeout: TIMEOUT })
-        .eq(index)
-        .should("be.visible")
-        .click();
+    // Click on the add task button
+    cy.get(".plus_add_button", { timeout: TIMEOUT })
+      .should("be.visible")
+      .click();
 
-      // Select the project from the project list
-      cy.get("#projects_list");
-      cy.get(
-        `li[data-type="project_list_item"][data-id="${project_id}"]`
-      ).click();
+    // Select the project from the project list
+    cy.get("#projects_list");
+    if (projectId) {
+      // Ensure projectId is defined
+      cy.get(`li[data-type="project_list_item"][data-id="${projectId}"]`, {
+        timeout: 10000,
+      }).click();
+    } else {
+      throw new Error("Project ID is undefined");
+    }
 
-      // Click on the add task button within the project
-      cy.get("button.plus_add_button").should("be.visible").click();
+    // Click on the add task button within the project
+    cy.get("button.plus_add_button").should("be.visible").click();
 
-      // Type the task content
-      cy.get('p[data-placeholder="Task name"]').type(content);
+    // Type the task content
+    cy.get('p[data-placeholder="Task name"]').type(content);
 
-      // Submit the task
-      cy.get('button[data-testid="task-editor-submit-button"]')
-        .should("be.visible")
-        .click();
-    });
+    // Submit the task
+    cy.get('button[data-testid="task-editor-submit-button"]')
+      .should("be.visible")
+      .click();
   });
 });
