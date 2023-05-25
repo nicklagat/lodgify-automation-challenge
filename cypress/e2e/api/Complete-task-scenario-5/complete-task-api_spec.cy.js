@@ -43,5 +43,7 @@ describe("Complete Task Via API", () => {
       // Step 5: Log the response for debugging purposes
       console.log(response);
     });
+
+    cy.deleteProjectViaAPI();
   });
 });

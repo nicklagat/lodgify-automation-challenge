@@ -16,8 +16,9 @@ describe("Update Task Via API", () => {
       // Step 5: Log in to the web application through the user interface
       cy.loginViaUI();
 
-      // Step 6: (optional) Verify the updated task details through the web application
     });
+
+    cy.deleteProjectViaAPI();
   });
 
   it("should return error when updating task without providing any information", () => {
@@ -26,5 +27,6 @@ describe("Update Task Via API", () => {
       // Step 4: Check the response and ensure the due date is null, indicating the update attempt has failed
       expect(response.due).to.eq(null);
     });
+    cy.deleteProjectViaAPI();
   });
 });

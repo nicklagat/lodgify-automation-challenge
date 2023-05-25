@@ -23,6 +23,8 @@ describe("Create Task Via API", () => {
       // Step 6: Assert that the current URL includes the created task's ID
       cy.url().should("include", "/app/project/" + projectId + createdTask);
     });
+
+    cy.deleteProjectViaAPI();
   });
 
   it("should not create task without required fields", () => {
