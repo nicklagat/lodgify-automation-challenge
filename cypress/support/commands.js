@@ -16,6 +16,7 @@ import DeleteProjectService from "./api-commands/deleteProjectService";
 
 import CreateWebTaskService from "./api-commands/createWebTaskService";
 
+
 // --------------------------------  LOGIN VIA WEB APPLICATION ----------------------------------------------------------------
 
 Cypress.Commands.add("loginViaUI", () => {
@@ -140,12 +141,12 @@ Cypress.Commands.add("completeTaskViaAPI", () => {
 // --------------------------------  GET TASK VIA API----------------------------------------------------------------
 
 Cypress.Commands.add("getTaskViaAPI", () => {
-  const taskService = new GetTasksService();
+  const getTasksService = new GetTasksService();
 
   const authToken = Cypress.env("authToken");
   const apiBaseUrl = Cypress.env("apiBaseUrl");
 
-  return taskService.getTaskViaAPI(authToken, apiBaseUrl);
+  return getTasksService.getTaskViaAPI(authToken, apiBaseUrl);
 });
 
 // --------------------------------  DELETE PROJECT VIA API----------------------------------------------------------------
