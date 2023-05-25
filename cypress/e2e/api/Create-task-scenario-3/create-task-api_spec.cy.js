@@ -43,4 +43,25 @@ describe("Create Task Via API", () => {
       expect(response.status).to.not.equal(200);
     });
   });
+
+  it("should not create task in a non-existent project", () => {
+    // Step 3: Attempt to create a new task without providing any required fields
+    cy.request({
+      method: "POST",
+      url: `${Cypress.env("apiBaseUrl")}/rest/v2/tasks`,
+      headers: {
+        Authorization: `Bearer ${Cypress.env("authToken")}`,
+        "Content-Type": "application/json",
+      },
+      body: {
+        content: "Test data",
+        project_id: "",
+      },
+      failOnStatusCode: false,
+    }).then((response) => {
+      // Step 4: Check the response's status code. It should not be 200 (OK) because the task creation should have failed
+      expect(response.status).to.not.equal(200, "Status code should not be 200");
+      expect(response.body).to.equal("project_id is invalid", "project_id is invalid");
+    });
+  });
 });

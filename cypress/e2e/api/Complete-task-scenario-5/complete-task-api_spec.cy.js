@@ -16,6 +16,8 @@ describe("Complete Task Via API", () => {
       // Step 5: Login to the web application
       cy.loginViaUI();
 
+      cy.wait(70000)
+
       // Step 6: Verify on the web application that the task has been completed
       // The specific steps to do this will depend on your application
     });

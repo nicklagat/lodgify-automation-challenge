@@ -18,6 +18,8 @@ describe("Update Task Via API", () => {
 
     });
 
+    cy.wait(60000)
+
     cy.deleteProjectViaAPI();
   });
 
