@@ -185,6 +185,42 @@ This test case verifies that a task cannot be marked as complete via API without
 - Attempt to mark a task as complete via API without providing a task ID.
 - Verify that the API response indicates an unsuccessful completion attempt.
 
+
+
+### 6. Validate Create Task via web application
+
+This suite contains the following test cases:
+
+#### Test Case 1: Successful Task creation via web application
+
+The steps of this test case are:
+
+1. Log into the web application.
+2. Navigate to the specific project.
+3. Create a new task via the web application.
+4. Verify on the web application that the task has been created.
+
+
+### 7. Validate Update Task via web application
+
+This suite contains the following test cases:
+
+#### Test Case 1: Successful Task updation via web application
+
+The steps of this test case are:
+
+1. Log into the web application.
+2. Navigate to the specific task.
+3. Update the task via the web application.
+4. Save the changes.
+5. Verify on the api that the task has been updated.
+
+
+
+
+
+
+
 ## Package.json
 
 Includes the following key sections:
