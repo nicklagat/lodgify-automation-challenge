@@ -1,29 +1,17 @@
-# Choose the version of Node.js
-FROM node:14
+FROM cypress/base:16  
+WORKDIR /app  
 
-# Create a new user to run the app
-RUN useradd appuser && chown -R appuser /app
+# dependencies will be installed only if the package files change  
+COPY package.json .  
+COPY package-lock.json .  
 
-# Set the working directory in the container to /app
-WORKDIR /app
+# by setting CI environment variable we switch the Cypress install messages  
+# to small "started / finished" and avoid 1000s of lines of progress messages  
+# https://github.com/cypress-io/cypress/issues/1243  
+ENV CI=1  
+RUN npm ci  
 
-# Copy package.json and package-lock.json
-COPY package*.json ./
-
-# Install dependencies in the container
-RUN npm ci
-
-# Copy the rest of your app's source code from your host to your image filesystem.
-COPY . .
-
-# Make sure that Cypress binary was installed
-RUN $(npm bin)/cypress verify
-
-# If your app listens on a port, expose it (replace 3000 with the correct port)
-EXPOSE 3000
-
-# Change to the app user
-USER appuser
-
-# Set the default command for the container
-CMD ["npm", "test"]
+# verify that Cypress has been installed correctly.  
+# running this command separately from "cypress run" will also cache its result  
+# to avoid verifying again when running the tests  
+RUN npx cypress verify
