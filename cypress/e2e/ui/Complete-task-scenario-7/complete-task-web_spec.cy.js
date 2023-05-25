@@ -1,4 +1,4 @@
-describe("Update Task via Web Application", () => {
+describe("Complete Task via Web Application", () => {
   beforeEach(() => {
     // Step 1: Get auth token
     cy.AuthViaAPI();
@@ -7,7 +7,7 @@ describe("Update Task via Web Application", () => {
     cy.loginViaUI();
   });
 
-  it("should update the task via the web application/ui", () => {
+  it("should complete task via web application", () => {
     const projectName = "Software Engineering Project";
     const content = "Eat Food";
 
@@ -38,6 +38,7 @@ describe("Update Task via Web Application", () => {
         .should("contain", "Software Engineering Project")
         .click();
     });
+
     cy.get("button.plus_add_button").should("be.visible").click();
 
     // Type the task content
@@ -54,32 +55,23 @@ describe("Update Task via Web Application", () => {
       )
       .click();
 
-    cy.get(".items li")
-      .first()
-      .click()
-      .then(() => {
-        cy.get('[data-testid="modal-overlay"]')
-          .find('div[data-testid="task-details-modal"]')
-          .click();
+    cy.get(".items li").first().click();
+    cy.get("button.task_checkbox.priority_1").first().click({ force: true });
 
-        cy.get(".task-overview-description-placeholder").click();
-        cy.get(
-          'p[data-placeholder="Description"].is-empty.is-editor-empty'
-        ).type("New description Four");
-        cy.get('[data-testid="task-editor-submit-button"]').click();
-      });
+    cy.get('button[aria-label="Close modal"]').click();
 
-    console.log(cy.getTaskViaAPI());
+    console.log("Food");
 
     cy.wait(30000);
     cy.getTaskViaAPI().then((response) => {
-      const allTasks = response.body; // This is the array of all tasks
-      console.log("Your tasks: ", allTasks);
-      const updatedTask = allTasks.find(
-        (task) => task.description === "New description Four"
-      );
+      const responseBody = response.body;
+      const responseStatus = response.status;
 
-      expect(updatedTask).to.exist;
+      // Assert that the response body is an empty array
+      expect(responseBody).to.deep.equal([]);
+
+      // Assert that the response status is 200 (OK)
+      expect(responseStatus).to.equal(200);
     });
   });
 });

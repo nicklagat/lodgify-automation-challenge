@@ -21,4 +21,21 @@ describe("Create Task Via API", () => {
       cy.url().should("include", "/app/project/" + projectId + createdTask);
     });
   });
+
+  it("should not create task without required fields", () => {
+    // Attempt to create a task without providing required fields
+    cy.request({
+      method: "POST",
+      url: `${Cypress.env("apiBaseUrl")}/rest/v2/tasks`,
+      headers: {
+        Authorization: `Bearer ${Cypress.env("authToken")}`,
+        "Content-Type": "application/json",
+      },
+      body: {},
+      failOnStatusCode: false,
+    }).then((response) => {
+      // Check the response's status
+      expect(response.status).to.not.equal(200);
+    });
+  });
 });

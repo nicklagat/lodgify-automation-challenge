@@ -4,7 +4,6 @@ describe("Update Task Via API", () => {
     cy.AuthViaAPI();
 
     cy.createProjectViaAPI();
-
   });
 
   it("should update task via API", () => {
@@ -15,6 +14,14 @@ describe("Update Task Via API", () => {
       // Step 2: Login into the web application
       cy.loginViaUI();
       // Step 3: Verify on web application that task is updated
+    });
+  });
+
+  it("should return error when updating task without providing any information", () => {
+    // Attempt to update a task without providing any required fields
+    cy.updateTaskViaAPI("").then((response) => {
+      // Verify that the due date in the response is null
+      expect(response.due).to.eq(null);
     });
   });
 });

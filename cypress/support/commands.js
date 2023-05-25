@@ -439,3 +439,27 @@ Cypress.Commands.add("createTaskViaWeb", (projectId) => {
       .click();
   });
 });
+
+
+
+
+
+
+// Negative scenarios
+
+Cypress.Commands.add("createInvalidProjectViaAPI", () => {
+  const authToken = Cypress.env("authToken");
+  const apiBaseUrl = Cypress.env("apiBaseUrl");
+
+  return cy
+    .request({
+      method: "POST",
+      url: `${apiBaseUrl}/rest/v2/projects`,
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+        "Content-Type": "application/json",
+      },
+      body: {}, // An empty body signifies missing required fields
+      failOnStatusCode: false // Prevent Cypress from failing the test if the status code is 4xx or 5xx
+    });
+});

@@ -18,4 +18,26 @@ describe("Authentication  via API", () => {
         expect(Cypress.env("authToken")).to.match(tokenPattern);
       });
   });
+
+  it("should fail to authenticate via API with incorrect credentials", () => {
+    // Step 0: Login via API with incorrect credentials
+    cy.request({
+      method: "POST",
+      url: `${Cypress.env("apiBaseUrl")}/auth/login`,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: {
+        email: "incorrect_email@test.com",
+        password: "incorrect_password",
+      },
+      failOnStatusCode: false,
+    }).then((response) => {
+      // Smart check 1: Verify the response status is not 200
+      expect(response.status).to.not.equal(200);
+
+      // Smart check 2: Verify auth token does not exist
+      expect(response.body.token).to.not.exist;
+    });
+  });
 });

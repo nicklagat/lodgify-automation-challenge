@@ -21,4 +21,16 @@ describe("Create Project", () => {
       cy.deleteProjectViaAPI();
     });
   });
+
+  it.only("should return error when creating project without required fields", () => {
+    // Attempt to create a new project without providing any required fields
+    cy.createInvalidProjectViaAPI().then((response) => {
+      // Verify that the API returns an error response indicating the missing information.
+      expect(response.status).to.eq(400);
+      expect(response.statusText).to.eq("Bad Request");
+      expect(response.body).to.eq(
+        "Name must be provided for the project creation"
+      );
+    });
+  });
 });

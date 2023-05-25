@@ -24,4 +24,20 @@ describe("Complete Task Via API", () => {
       expect(response.status).to.equal(204);
     });
   });
+
+  it("should not complete task via API without providing necessary information", () => {
+    // Attempt to mark a task as complete without providing a task ID
+    cy.request({
+      method: "POST",
+      url: `${Cypress.env("apiBaseUrl")}/rest/v2/tasks//close`,
+      headers: {
+        Authorization: `Bearer ${Cypress.env("authToken")}`,
+        "Content-Type": "application/json",
+      },
+      failOnStatusCode: false,
+    }).then((response) => {
+      expect(response.status).to.not.equal(200);
+      console.log(response);
+    });
+  });
 });
