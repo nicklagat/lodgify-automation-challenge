@@ -1,9 +1,9 @@
 describe("Complete Task via Web Application", () => {
   beforeEach(() => {
-    // Step 1: Get auth token
+    // Step 1: Authenticate or obtain the auth token
     cy.AuthViaAPI();
 
-    //Step 2: Login via UI
+    // Step 2: Log into the web application through the user interface
     cy.loginViaUI();
   });
 
@@ -11,7 +11,7 @@ describe("Complete Task via Web Application", () => {
     const projectName = "Software Engineering Project";
     const content = "Eat Food";
 
-    // Step 3: Verify on web application that task is updated
+    // Step 3: Verify that the task is updated on the web application
     cy.wait(Math.floor(Math.random() * (60000 - 30000 + 1)) + 30000);
     cy.get("button")
       .filter(
@@ -63,6 +63,8 @@ describe("Complete Task via Web Application", () => {
     console.log("Food");
 
     cy.wait(30000);
+
+    // Step 4: Retrieve the task via API and perform assertions
     cy.getTaskViaAPI().then((response) => {
       const responseBody = response.body;
       const responseStatus = response.status;
