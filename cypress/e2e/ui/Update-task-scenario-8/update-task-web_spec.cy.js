@@ -99,5 +99,6 @@ describe("Update Task via Web Application", () => {
 
       expect(updatedTask).to.exist;
     });
+
   });
 });

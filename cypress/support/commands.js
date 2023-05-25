@@ -16,7 +16,6 @@ import DeleteProjectService from "./api-commands/deleteProjectService";
 
 import CreateWebTaskService from "./api-commands/createWebTaskService";
 
-
 // --------------------------------  LOGIN VIA WEB APPLICATION ----------------------------------------------------------------
 
 Cypress.Commands.add("loginViaUI", () => {
@@ -152,13 +151,16 @@ Cypress.Commands.add("getTaskViaAPI", () => {
 // --------------------------------  DELETE PROJECT VIA API----------------------------------------------------------------
 
 Cypress.Commands.add("deleteProjectViaAPI", () => {
-  const projectService = new DeleteProjectService();
-
   const authToken = Cypress.env("authToken");
   const apiBaseUrl = Cypress.env("apiBaseUrl");
   const projectId = Cypress.env("projectId");
 
-  return projectService.deleteProjectViaAPI(authToken, apiBaseUrl, projectId);
+  if (!authToken || !apiBaseUrl || !projectId) {
+    throw new Error("Missing authentication token, API base URL, or project ID");
+  }
+
+  const deleteProjectService = new DeleteProjectService();
+  return deleteProjectService.deleteProjectViaAPI(authToken, apiBaseUrl, projectId);
 });
 
 // --------------------------------  CREATE TASK VIA WEB APPLICATION ----------------------------------------------------------------
