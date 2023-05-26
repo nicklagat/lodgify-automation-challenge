@@ -65,7 +65,7 @@ Once you've installed Cypress and all of the project dependencies, you're ready 
 
 ## Scenarios
 
-Here's a detailed description of each test suite in our test framework:
+Here's a detailed description of each test suite/scenario in our test framework:
 
 ### 1. Authentication via API
 
@@ -223,35 +223,40 @@ The steps of this test case are:
 
 Includes the following key sections:
 
-## name: 
+### name: 
 
 The name of the project.
 
-## version:
+### version:
 
 The version of the project.
 
-## description:
+### description:
 
 A brief description of the project.
 
-## main: 
+
+### main: 
 
 The entry point file of the project.
 
-## scripts: 
+
+### scripts: 
 
 The scripts that can be executed using npm/yarn. In this case, there is a script called "test" that runs the Cypress tests using the Chrome browser.
 
-## author: 
+
+### author: 
 
 The author or creator of the project.
 
-## license: 
+
+### license: 
 
 The license under which the project is distributed.
 
-## devDependencies:
+
+### devDependencies:
 
 The development dependencies required for the project. This includes Cypress for running tests, ESLint plugin for Cypress, and mochawesome for generating test reports.
 dependencies: The runtime dependencies required for the project. In this case, it includes the minimatch library.
