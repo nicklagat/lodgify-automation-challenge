@@ -1,5 +1,3 @@
-I apologize for the oversight. Here's the updated README file with the missing test suites:
-
 # Lodgify Automation QA Challenge
 
 This repository contains end-to-end tests for a Todoist application. The tests are written using the Cypress testing framework and validate the functionality of various API endpoints and user interface.
