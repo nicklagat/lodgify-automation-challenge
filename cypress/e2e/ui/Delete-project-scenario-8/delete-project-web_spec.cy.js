@@ -15,7 +15,7 @@ describe("Delete Project via Web Application", () => {
 
     cy.wait(Math.floor(Math.random() * (60000 - 30000 + 1)) + 30000);
 
-    const projectPage = new DeleteWebPage();l 
+    const projectPage = new DeleteWebPage();
     projectPage
       .addProject(projectName)
       .selectProject(projectName)

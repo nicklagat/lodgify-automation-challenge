@@ -213,6 +213,35 @@ The steps of this test case are:
 4. Save the changes.
 5. Verify on the api that the task has been updated.
 
+### 8. Validate Complete Task via web application
+
+This suite contains the following test cases:
+
+#### Test Case 1: Successful Task updation via web application
+
+The steps of this test case are:
+
+1. Log into the web application.
+2. Navigate to the specific task.
+3. Mark the task as complete via the web application.
+4. Save the changes.
+5. Verify on the api that the task has been marked as complete.
+
+
+### 9. Validate Delete Project via web application
+
+This suite contains the following test cases:
+
+#### Test Case 1: Successful Task updation via web application
+
+The steps of this test case are:
+
+1. Log into the web application.
+2. Navigate to the specific project.
+3. Delete the project via the web application.
+4. Confirm the deletion.
+5. Verify on the web application that the project has been deleted.
+
 
 
 

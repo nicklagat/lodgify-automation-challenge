@@ -1,3 +1,4 @@
+import CompleteWebPage from "../../pom/completeWebPage";
 describe("Complete Task via Web Application", () => {
   beforeEach(() => {
     // Step 1: Authenticate or obtain the auth token
@@ -10,56 +11,17 @@ describe("Complete Task via Web Application", () => {
   it("should complete task via web application", () => {
     const projectName = "Software Engineering Project";
     const content = "Eat Food";
-
-    // Step 3: Verify that the task is updated on the web application
     cy.wait(Math.floor(Math.random() * (60000 - 30000 + 1)) + 30000);
-    cy.get("button")
-      .filter(
-        '[aria-label="Add project"][type="button"][aria-disabled="false"][tabindex="0"]'
-      )
-      .click()
-      .then(() => {
-        // Here you can interact with the modal or perform further actions
-        // Creating a project via UI
-        cy.get('[data-testid="modal-overlay"]')
-          .find("input#edit_project_modal_field_name")
-          .type("Software Engineering Project");
+    // Click on the "Add project" button
+    const projectPage = new CompleteWebPage();
 
-        cy.get("button")
-          .filter('[type="submit"][aria-disabled="false"][class^="_8313bd46"]')
-          .click();
-      });
-
-    console.log(projectName);
-    cy.wait(15000);
-    // cy.get("#projects_list").contains(`"${projectName}"`).click();
-    cy.get("#projects_list li").each((listItem) => {
-      cy.wrap(listItem)
-        .should("contain", "Software Engineering Project")
-        .click();
-    });
-
-    cy.get("button.plus_add_button").should("be.visible").click();
-
-    // Type the task content
-    cy.get('p[data-placeholder="Task name"]').type(content);
-
-    cy.get('button[data-testid="task-editor-submit-button"]')
-      .should("be.visible")
-      .click();
-
-    cy.wait(4000);
-    cy.get("button")
-      .filter(
-        '[aria-label="Cancel"][type="button"][aria-disabled="false"][class^="_8313bd46"]'
-      )
-      .click();
-
-    cy.get(".items li").first().click();
-    cy.get("button.task_checkbox.priority_1").first().click({ force: true });
-
-    cy.get('button[aria-label="Close modal"]').click();
-
+    projectPage.addProject(projectName);
+    projectPage.wait(15000);
+    projectPage.selectProject();
+    projectPage.addTask(content);
+    projectPage.selectFirstItemAndClickCheckbox();
+    projectPage.log("Food");
+    projectPage.wait(30000);
     console.log("Food");
 
     cy.wait(30000);
