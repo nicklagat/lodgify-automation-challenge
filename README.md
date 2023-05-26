@@ -49,13 +49,13 @@ This section will guide you on how to prepare your system for running the tests.
 
 Once you've installed Cypress and all of the project dependencies, you're ready to run the tests. Follow these instructions:
 
-1. To open the Cypress Test Runner, use the command:
+1. To open the Cypress Test Runner, use the command in your terminal:
    ```
    npx cypress open
    ```
    or
 
-2. To run the tests in headless mode, use the command:
+2. To run the tests in headless mode, use the command in your terminal:
    ```
    npx run test 
 
