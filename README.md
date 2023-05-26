@@ -4,7 +4,7 @@ This repository contains end-to-end tests for a Todoist application. The tests a
 
 # Assumptions:
 
-I did assumptions that the user will be able to perform project creation, task creation, updating a task and deleting a project
+I did assumptions that the user will be able to perform project creation, task creation, updating a task and deleting a project.
 
 ## Table of Contents
 
@@ -19,6 +19,10 @@ I did assumptions that the user will be able to perform project creation, task c
 
 These tests are designed to cover various aspects of the Todoist application, including user authentication, project creation, task creation, updating tasks, and completing tasks as per the scenario requirements provided and the ones I generated. The aim is to ensure that the API and UI is functioning correctly and meets the specified requirements.
 
+I have introduced extended wait times for certain tests to account for the occasional unpredictability and inconsistency in the appearance and behavior of some user interface elements in the application under test.
+
+
+
 ## Getting Started
 
 This section will guide you on how to prepare your system for running the tests. Follow the steps below:
@@ -28,6 +32,7 @@ This section will guide you on how to prepare your system for running the tests.
 - Node.js (version 10 or higher)
 - npm (comes with Node.js installation)
 
+- Update the credentials.json fixture file with your own credentials
 ### Installation
 
 1. Clone the repository: 
