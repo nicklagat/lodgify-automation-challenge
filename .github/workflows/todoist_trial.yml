@@ -23,11 +23,21 @@ jobs:
         
       - name: Install dependencies
         run: npm ci
+        
+      - name: Install Chrome
+        run: |
+          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo apt install ./google-chrome-stable_current_amd64.deb
+      
       
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v2
         with:
-          start: npm start
+          start: npm run test
           wait-on: 'http://localhost:3000'
           wait-on-timeout: 60
           headless: true
+          browser: chrome
+          
+          
+          
