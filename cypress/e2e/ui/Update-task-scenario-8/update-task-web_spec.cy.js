@@ -1,4 +1,5 @@
 import UpdateWebPage from "../../pom/updateWebPage";
+import DeleteWebPage from "../../pom/deleteWebPage";
 describe("Update Task via Web Application", () => {
   beforeEach(() => {
     // Step 1: Get auth token
@@ -10,7 +11,6 @@ describe("Update Task via Web Application", () => {
 
   it("should update the task via the web application/ui", () => {
     const projectName = "Software Engineering Project";
-    const content = "Eat Food";
 
     // Step 3: Verify on the web application that the task is updated
     cy.wait(Math.floor(Math.random() * (60000 - 30000 + 1)) + 30000);

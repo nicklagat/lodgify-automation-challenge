@@ -1,4 +1,5 @@
 import CompleteWebPage from "../../pom/completeWebPage";
+import DeleteWebPage from "../../pom/deleteWebPage";
 describe("Complete Task via Web Application", () => {
   beforeEach(() => {
     // Step 1: Authenticate or obtain the auth token
@@ -37,5 +38,10 @@ describe("Complete Task via Web Application", () => {
       // Assert that the response status is 200 (OK)
       expect(responseStatus).to.equal(200);
     });
+
+    cy.wait(Math.floor(Math.random() * (60000 - 30000 + 1)) + 30000);
+
+    const projectDPage = new DeleteWebPage();
+    projectDPage.selectProject(projectName).deleteProject();
   });
 });

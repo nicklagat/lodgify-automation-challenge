@@ -2,7 +2,8 @@ class DeleteWebPage {
   addProject(projectName) {
     cy.get("button")
       .filter(
-        '[aria-label="Add project"][type="button"][aria-disabled="false"][tabindex="0"]'
+        '[aria-label="Add project"][type="button"][aria-disabled="false"][tabindex="0"]',
+        { timeout: 90000 }
       )
       .click()
       .then(() => {

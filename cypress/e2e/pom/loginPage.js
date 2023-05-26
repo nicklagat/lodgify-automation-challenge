@@ -18,7 +18,7 @@ class LoginPage {
     return this;
   }
 
-   submit() {
+  submit() {
     const button = cy.get('[data-gtm-id="start-email-login"]');
     button.click();
     return this;
